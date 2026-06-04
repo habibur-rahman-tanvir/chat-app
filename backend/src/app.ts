@@ -3,6 +3,7 @@ import morgan from "morgan";
 import { isProduction } from "./utilities/checkENV.js";
 import { corsMiddleware } from "./middlewares/cors.middleware.js";
 import { authRouter } from "./routes/auth.route.js";
+import { User } from "./models/user/User.model.js";
 
 const app: Express = express();
 app.set("trust proxy", 1);

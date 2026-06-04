@@ -6,6 +6,7 @@ import "dotenv/config";
 import { getEnvironment, isProduction } from "./utilities/checkENV.js";
 import { getESMPaths } from "./utilities/esmPath.js";
 import connectDatabase from "./configs/db.config.js";
+import { logger } from "./configs/logger.js";
 
 const PORT = process.env.PORT || 8000;
 
@@ -14,7 +15,7 @@ const run = async () => {
 
   if (isProduction()) {
     app.listen(PORT, () => {
-      console.log(`Server(${getEnvironment()}) running`);
+      // console.log(`Server(production) running`);
     });
   } else {
     const { __dirname } = getESMPaths(import.meta.url);
@@ -27,9 +28,7 @@ const run = async () => {
 
     const server = https.createServer({ key, cert }, app);
     server.listen(PORT, () => {
-      console.log(
-        `Server(${getEnvironment()}) running at https://localhost:${PORT}`,
-      );
+      logger.info(`Server(development) running at https://localhost:${PORT}`);
     });
   }
 };
