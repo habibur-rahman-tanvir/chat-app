@@ -5,10 +5,13 @@ import app from "./app.js";
 import "dotenv/config";
 import { getEnvironment, isProduction } from "./utilities/checkENV.js";
 import { getESMPaths } from "./utilities/esmPath.js";
+import connectDatabase from "./configs/db.config.js";
 
 const PORT = process.env.PORT || 8000;
 
 const run = async () => {
+  await connectDatabase();
+
   if (isProduction()) {
     app.listen(PORT, () => {
       console.log(`Server(${getEnvironment()}) running`);
