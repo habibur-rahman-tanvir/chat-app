@@ -1,13 +1,21 @@
 import { api } from "@/utilities/appClient";
 import { useGoogleLogin } from "@react-oauth/google";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const Login = () => {
-  const googleResponse = (authResult) => {
+  const navigate = useNavigate();
+
+  const googleResponse = async (authResult) => {
     try {
-      console.log(authResult);
-      api.post(`/api/auth/google?code=${authResult["code"]}`);
+      const res = await api.post(`/api/auth/google?code=${authResult["code"]}`);
+      if (res.status === 201) {
+        navigate("/", { replace: true });
+        return;
+      }
     } catch (err) {
       console.log("AuthErr:", err);
+      toast.error(err.message ? err.message : "Error in login");
     }
   };
 

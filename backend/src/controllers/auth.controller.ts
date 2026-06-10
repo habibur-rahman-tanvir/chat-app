@@ -54,6 +54,16 @@ export const loginWithGoogle: RequestHandler = async (req, res) => {
   }
 };
 
+export const logoutUser: RequestHandler = async (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw new AppError("Something went wrong");
+    res.clearCookie("connect.sid");
+    return res.json({
+      message: "Logout successfull",
+    });
+  });
+};
+
 export const refreshAccessToken: RequestHandler = async (req, res) => {
   if (!req.session.user) throw new AppError("User not signed in", 401);
 
