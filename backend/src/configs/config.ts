@@ -1,0 +1,2 @@
+export const SESSION_EXPIRE_TIME_DAY = 29;
+export const JWT_EXPIRE_TIME_MINUTES = 5;

@@ -7,17 +7,15 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    googleName: {
-      type: String,
-    },
-    googleAvatar: {
-      type: String,
-    },
     name: {
       type: String,
     },
     avatar: {
       type: String,
+    },
+    googleMeta: {
+      name: String,
+      picture: String,
     },
   },
   {

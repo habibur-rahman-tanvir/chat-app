@@ -1,14 +1,14 @@
 import express from "express";
 import {
-  loginUser,
-  logoutUser,
+  loginWithGoogle,
   refreshAccessToken,
 } from "../controllers/auth.controller.js";
+import { userSession } from "../configs/session.js";
 
 const authRouter = express.Router();
+authRouter.use(userSession);
 
-authRouter.post("/login", loginUser);
-authRouter.post("/logout", logoutUser);
+authRouter.post("/google", loginWithGoogle);
 authRouter.post("/refresh", refreshAccessToken);
 
 export { authRouter };

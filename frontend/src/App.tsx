@@ -1,10 +1,14 @@
-import HelloWorld from "@/components/HelloWorld";
+import AppContext from "./contexts/AppContext";
+import { RouterProvider } from "react-router";
+import router from "./routes";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
-    <div>
-      <HelloWorld />
-    </div>
+    <AppContext>
+      <Toaster />
+      <RouterProvider router={router} />
+    </AppContext>
   );
 };
 
